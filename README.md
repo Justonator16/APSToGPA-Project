@@ -90,7 +90,7 @@ This HTML file offers a user-friendly interface for computing the APS score usin
      - Python
      - SQLIte
      - JavaScript
-2. Clone the repository: `git clone https://github.com/Justonator16/APSToGPA.git`
+2. Clone the repository: `git clone https://github.com/Justonator16/APSToGPA-Project.git`
 3. Navigate to the project folder: `cd apstogpa`
 
 ## Usage
