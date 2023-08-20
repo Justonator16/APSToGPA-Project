@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="success-message" align="center">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+    {% endwith %}
+    <h1 align='center' class="homepage">What is APS and GPA?</h1>
+
+    <a href="https://www.youtube.com/watch?v=HGrzI86BcKE&pp=ygUWY2FsY3VsYXRpbmcgYXBzIHNjb3JlIA%3D%3D"><h2>APS</h2></a>
+    <p>APS stands for "Admission Point Score" in South Africa. The Department of Higher Education and Training (DHET) in South Africa uses a method called the Admission Point Score to determine applicants' eligibility for admission to public universities .</p>
+    <p>Based on a student's final matriculation (Grade 12) exam results, the APS is determined. The student's APS is the total of the points earned in several courses, and each matric subject is given a particular number of points. Depending on the university, the course of study, and the degree of entrance competition, different APS criteria apply.</p>
+
+    <p>The table below shows the typical APS Scrore points corresponding to different grades:</p>
+
+<div align="center">
+    <table class="aps-table">
+        <thead>
+            <th>Grade Range</th>
+            <th>APS Level</th>
+        </thead>
+        <tr>
+            <td>80%-100%</td>
+            <td>7</td>
+        </tr>
+        <tr>
+            <td>70%-79%</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>60%-69%</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>50%-59%</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>40%-49%</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>30%-49%</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>0%-29%</td>
+            <td>1</td>
+        </tr>
+    </table>
+</div>
+
+<a href="https://youtu.be/0p4rEImJqZU"><h2>GPA</h2></a>
+<p>The term GPA refers to the "Grade Point Average". The student's GPA is the sum of points earned across various courses, where each matric subject corresponds to a specific number of points. Different GPA requirements apply based on the university, the chosen field of study, and the level of competition for admission.</p>
+<p>You can determine your letter grade and grade points based on the final grade of a specific subject or GPA for a group of subjects. The subsequent table illustrates the usual GPA grade assignments corresponding to different percentage ranges:</p>
+<div align="center">
+    <table class="aps-table">
+    <thead>
+        <th>Grade Range</th>
+        <th>GPA Grade</th>
+    </thead>
+    <tr>
+        <td>80%-100%</td>
+        <td>A</td>
+    </tr>
+    <tr>
+        <td>70%-79%</td>
+        <td>B</td>
+    </tr>
+    <tr>
+        <td>60%-69%</td>
+        <td>C</td>
+    </tr>
+    <tr>
+        <td>50%-59%</td>
+        <td>D</td>
+    </tr>
+    <tr>
+        <td>40%-49%</td>
+        <td>E</td>
+    </tr>
+    <tr>
+        <td>30%-0%</td>
+        <td>F</td>
+    </tr>
+</table>
+{% endblock %}

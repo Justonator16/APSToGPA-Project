@@ -1,7 +1,7 @@
 from flask import Flask, flash, redirect, render_template, request, session
 from cs50 import SQL
 from werkzeug.security import check_password_hash, generate_password_hash
-from aps_and_gpa_calculator import APSLevel , GradeToLetter, GradeToGpaScale
+from aps_and_gpa_calculators import APSLevel , GradeToLetter, GradeToGpaScale
 
 app = Flask(__name__)
 app.secret_key = 'APSToGPA'

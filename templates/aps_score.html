@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div>
+    <h2 align="center" class="aps-calculator" >APS Score Calculator</h2>
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message == 'A report with the same name already exists for another record.' %}
+                    <p class="error-message" align="center">{{ message }}</p>
+                    {% else %}
+                    <p class="success-message" align="center">{{ message }}</p>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+    {% endwith %}
+    <p align="center">Calculate your APS score and GPA weighting (High School) for a group of subjects . </p>
+
+    <div align="center">
+        <table class="aps-table">
+            <tr>
+                <th>Subject</th>
+                <th>Grade</th>
+            </tr>
+                <form action="/aps_score" method='post'>
+                    <!-- 7 user inputs for subjects and 7 user inputs for grades inorderto calculate the aps and gpa -->
+            <tr>
+                <td><input id='subjects' type="text" autocomplete="off" placeholder="Name of Subject" name="subject1" required></td>
+                <td><input id='grades' type="number" min="1" max="100"  placeholder="Enter Final Mark for Grade" name="grade1" required></td>
+            </tr>
+            <tr>
+                <td><input id='subjects' type="text" autocomplete="off" placeholder="Name of Subject" name="subject2" required></td>
+                <td><input id='grades' type="number" min="1" max="100"  placeholder="Enter Final Mark for Grade" name="grade2" required></td>
+            </tr>
+            <tr>
+                <td><input id='subjects' type="text" autocomplete="off" placeholder="Name of Subject" name="subject3" required></td>
+                <td><input id='grades' type="number" min="1" max="100"  placeholder="Enter Final Mark for Grade" name="grade3" required></td>
+            </tr>
+            <tr>
+                <td><input id='subjects' type="text" autocomplete="off" placeholder="Name of Subject" name="subject4" required></td>
+                <td><input id='grades' type="number" min="1" max="100"  placeholder="Enter Final Mark for Grade" name="grade4" required></td>
+            </tr>
+            <tr>
+                <td><input id='subjects' type="text" autocomplete="off" placeholder="Name of Subject" name="subject5" required></td>
+                <td><input id='grades' type="number" min="1" max="100" placeholder="Enter Final Mark for Grade" name="grade5" required></td>
+            </tr>
+            <tr>
+                <td><input id='subjects' type="text" autocomplete="off" placeholder="Name of Subject" name="subject6" required></td>
+                <td><input id='grades' type="number" min="1" max="100"  placeholder="Enter Final Mark for Grade" name="grade6" required></td>
+            </tr>
+            <tr>
+                <td><input id='subjects' type="text" autocomplete="off" placeholder="Name of Subject" name="subject7" required></td>
+                <td><input id='grades' type="number" min="1" max="100"  placeholder="Enter Final Mark for Grade" name="grade7" required></td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <div class="content">
+            <button type="submit"><span></span>Save Report</button>
+                </form>
+            <button type="submit" name="button" id='button' onclick="GetApsScore()" ><span></span>Get APS Score</button>
+            <button type="submit" name="button" id='button' onclick="GetGpa()" ><span></span>Convert To GPA</button>
+
+        </div>
+    </div>
+</div>
+
+<h3 align="center">Do you want to view a detailed summary of each subject and grade in accordance with aps level, letter grade, and gpa weighting ?</h3>
+<br>
+    <div class="content">
+        <button type="submit" onclick="SaveReportName()"><span></span>Yes</button>
+        <button type="submit" onclick="ThankYou()"><span></span>No</button>
+    </div>
+<div class="response"></div>
+{% endblock %}

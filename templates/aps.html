@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div >
+    <h2 align='center' class="aps-level-calculator">APS & Letter Grade Calculator</h2>
+    <p align="center">Determine your APS level for a subject or obtain a letter grade for a specific subject. </p>
+
+    <div align="center">
+            <table class="aps-table">
+                <thead>
+                    <th>Subject</th>
+                    <th>Grade</th>
+                </thead>
+                <tr>
+                    <td><input id='subject' type="text" autocomplete="off" placeholder="Name of Subject" name="subject"></td>
+                    <td><input id='grade' type="number" min="1" max="100" name="grade" placeholder="Enter Final Mark for Grade"></td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <div class="content">
+                <button type="submit" name="button" onclick="GetApsLevel()"><span></span>Calculate APS Score</button>
+            </div>
+            <div class="content">
+                <p align="left">Instantly transform your numerical grade into a corresponding letter grade (e.g., A, B, C+).</p>
+                <div class="gpa">
+                    <label>Convert APS Level to Letter Grade:</label>
+                    <a href="#top"><button type="submit" onclick="GetLetterGrade()" ><span></span>Convert to Letter Grade</button></a>
+                </div>
+
+            </div>
+    </div>
+</div>
+{% endblock %}

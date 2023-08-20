@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div>
+    <h2 align="center" class="aps-calculator" > Reports </h2>
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message == "Select a report name to view a report" %}
+                    <p class="error-message" align="center">{{ message }}</p>
+                    {% else %}
+                    <p class="success-message" align="center">{{ message }}</p>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+    {% endwith %}
+    <br>
+    <br>
+    <div class="content">
+        <form action="/transcript" method="post">
+            <select name="selected_report_name" id="selected_report_name" >
+                <option disabled selected >Select report name</option>
+                {% for name in names_list %}
+                <option value="{{ name }}" >{{ name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" ><span></span>View Report</button>
+        </form>
+    </div>
+
+    {% if full_report_name %}
+    <h2 align="center">{{ full_report_name[0]['report_name'] }}</h2>
+    {% endif %}
+    <div align="center" id="tables" >
+        <table class="aps-table">
+            <thead>
+                <th>Subject</th>
+                <th>Grade</th>
+                <th>APS Score</th>
+                <th>Letter Grade</th>
+                <th>Grade Points</th>
+            </thead>
+           
+            {% for i in range(user_report|length) %}
+            <tr>
+                <td >{{ user_report[i]["subject"] }}</td>
+                <td align="center">{{ user_report[i]["grade"] }}</td>
+                <td align="center">{{ apslevels[i] }}</td>
+                <td align="center">{{ letter_grades[i] }}</td>
+                <td align="center">{{ gpa_scale_grades[i] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <table class="aps-table">
+            <thead>
+                <th>APS Average</th>
+                <th>GPA 4.0 Scale</th>
+            </thead>
+            <tr>
+              <td align="center">{{ aps_score }}</td>
+              <td align="center">{{ gpa_score }}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

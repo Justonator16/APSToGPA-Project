@@ -1,0 +1,25 @@
+{% extends "form.html" %}
+
+
+{% block body %}
+
+<div class="content-index">
+    <h1>Log In</h1>
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message == "Account created successfully" %}
+                    <p class="success-message">{{ message }}</p>
+                    {% else %}
+                    <p class="error-message">{{ message }}</p>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+    {% endwith %}
+    <form action="/login" method="post">
+        <input type="text" autocomplete='off' name="username" placeholder="Username"><br>
+        <input type="password" autocomplete='off' name='password' placeholder="Password"><br>
+        <button type="submit"><span></span>Log In</button>
+    </form>
+</div>
+{% endblock %}
