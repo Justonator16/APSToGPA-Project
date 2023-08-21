@@ -21,7 +21,7 @@ Welcome to APStoGPA, South Africa's greatest tool for calculating and converting
 ## Features
 Main features of APSToGPA include:
 > [!MPORTANT]
-> Calcuulating GPA in a 4.0 scale is only limited to high school students in this application.
+> The application is exclusively utilized by high school students who are either applying to colleges or universities or simply interested in understanding their APS and GPA.
 - **APS Score Calculation**: Easily calculate your Admission Point Score (APS) based on your final exam results.
 
 - **GPA Conversion**: Convert your grades to GPA values on a 4.0 scale for a clearer understanding of your academic performance.
@@ -29,8 +29,6 @@ Main features of APSToGPA include:
 - **Letter Grade Conversion**: Instantly transform your numerical grades into letter grades (e.g., A, B, C+) for quick interpretation.
 
 - **Custom Reports**: Create personalized reports with unique names to track and compare your academic progress over time.
-
-- **Mobile-Friendly**: Enjoy a seamless user experience on both desktop and mobile devices, ensuring accessibility on the go.
 
 - **Clear User Interface**: Intuitive design and easy navigation make it simple for users to input data and obtain results.
 
@@ -92,7 +90,7 @@ This HTML file offers a user-friendly interface for computing the APS score usin
      - Python
      - SQLIte
      - JavaScript
-2. Clone the repository: `git clone https://github.com/Justonator16/APSToGPA.git`
+2. Clone the repository: `git clone https://github.com/Justonator16/APSToGPA-Project.git`
 3. Navigate to the project folder: `cd apstogpa`
 
 ## Usage
