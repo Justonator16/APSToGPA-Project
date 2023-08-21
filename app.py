@@ -1,4 +1,5 @@
 from flask import Flask, flash, redirect, render_template, request, session
+from flask_session import Session
 from cs50 import SQL
 from werkzeug.security import check_password_hash, generate_password_hash
 from aps_and_gpa_calculators import APSLevel , GradeToLetter, GradeToGpaScale
@@ -6,6 +7,10 @@ from aps_and_gpa_calculators import APSLevel , GradeToLetter, GradeToGpaScale
 app = Flask(__name__)
 app.secret_key = 'APSToGPA'
 
+app.config["SECRET_KEY"] = "APSToGPA"
+app.config["SESSION_TYPE"] = "filesystem"
+app.config["SESSION_PERMANENT"] = False
+Session(app)
 
 db = SQL("sqlite:///apstogpa.db")
 
@@ -58,16 +63,22 @@ def login():
           username = request.form.get("username")
           password = request.form.get("password")
 
-
           """ Check if user exists in database """
-          users = db.execute("SELECT username, hash_password FROM users")
-          for user in users:
-               if username != user['username']:
-                    flash("User does not exist")
-                    return render_template("login.html")
-               elif not check_password_hash(user['hash_password'] ,password):
-                    flash("Invalid password")
-                    return render_template("login.html")
+          users = db.execute("SELECT username FROM users")
+
+          """ Usernames in database who successfully logged in """
+          usernames_logged = [ user['username'] for user in users]
+
+          if username not in usernames_logged:
+               flash("User does not exist")
+               return render_template("login.html")
+
+          """ Check if password submitted by user is valid """
+          user_password = db.execute("SELECT hash_password FROM users where username = ?", username)
+
+          if not check_password_hash(user_password[0]['hash_password'], password):
+               flash("Invalid password")
+               return render_template("login.html")
 
           if not username or not password:
                flash("Enter username/password")
@@ -155,7 +166,7 @@ def aps_score_calculator():
                if report_name :
                     db.execute("UPDATE user_reports set report_name = ? WHERE user_id = (SELECT id FROM users WHERE username = (SELECT * FROM current_user)) ORDER BY report_id DESC LIMIT 7" , report_name)
                     flash(f"Report name {report_name} saved")
-                    return render_template("transcript.html")
+                    return render_template("aps_score.html")
 
           return render_template("aps_score.html")
      else:
@@ -174,14 +185,16 @@ def transcripts():
 
           """ Remove all reports with name N/A from list """
           names_list = [ name['report_name'] for name in report_names ]
-          names_list.remove('N/A')
+
+          if 'N/A' in names_list:
+               names_list.remove('N/A')
 
           if request.method == "POST":
                """ Diplays full academic record of all 7 subjects and grades with thier GPA's and APS score"""
                selected_report_name = request.form.get("selected_report_name")
 
                if not selected_report_name:
-                    flash("Select a report name")
+                    flash("Select a report name to view a report")
                     return render_template("transcript_default.html", names_list=names_list)
 
                """ Find the full transcript name in database  """
@@ -206,6 +219,3 @@ def transcripts():
                return render_template("transcript.html", names_list=names_list ,user_report=user_report ,apslevels=apslevels ,letter_grades=letter_grades ,gpa_scale_grades=gpa_scale_grades ,aps_score=aps_score ,gpa_score=gpa_score, full_report_name=full_report_name)
           else:
                return render_template("transcript_default.html", names_list=names_list)
-
-
-
