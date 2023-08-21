@@ -53,7 +53,6 @@ The following is a list of all html files in my project and their purpose inorde
 
 - **layout.html** - From this point on, the page applies to all html pages. This shortens my code and allows me to concentrate on the purpose of the pages based on their titles, eliminating the need to copy and paste simple body tags.
 
-
 - **home.html** - The main landing page of the web app serves as an introduction to the APStoGPA project, presenting its features and benefits to users. It also offers quick access to various sections of the app. Furthermore, it provides a basic explanation of APS and GPA, accompanied by links to YouTube videos that offer in-depth assistance to logged-in users seeking a comprehensive understanding of APS and GPA concepts.
 
 - **aps.html** -
@@ -78,10 +77,17 @@ This HTML file offers a user-friendly interface for computing the APS score usin
 - **apstogpa.db** - The database serves as a repository for all user information, encompassing usernames, passwords, and the subjects and grades they have saved under personalized names. This information is then utilized within the <sup>app.py</sup>> file to perform a range of functions, including verifying user logins by cross-referencing data in the users table, as well as retrieving subjects and grades that users have saved for display within the transcript section of the web application.
 
 #### Problems l encountered in my project and how l fixed them
-- From Flask sessions, I aimed to have the browser remember the currently logged-in user. I attempted to create a dictionary using a key-value pair, where the key was "user_id" and the value was the user ID from the database of users. However, the dictionary returned a "None" value for the value section. Despite my efforts to find a solution, I couldn't resolve this issue. As an alternative, I devised an approach to store the logged-in user's information in the "current_user" table within my "apstogpa" database. Within this table, there is a column named "user_logged_in" that stores a text value. Each time a different user logs in, their username is updated in the "user_logged_in" column. This method replicates the functionality of Flask sessions by storing the username for later use in other functions and HTML files. Now, I can easily refer to the username within the "current_user" table to determine which reports should be displayed based on the logged-in user. This solution addresses potential issues I might have encountered in my application, such as users accessing other users' reports without using their own accounts.
+- From Flask sessions, I aimed to have the browser remember the currently logged-in user. I attempted to create a dictionary using a key-value pair, where the key was "user_id" and the value was the user ID from the database of users. However, the dictionary returned a "None" value for the value section. Despite my efforts to find a solution, I couldn't resolve this issue.
 
+As an alternative, I devised an approach to store the logged-in user's information in the "current_user" table within my "apstogpa" database. Within this table, there is a column named "user_logged_in" that stores a text value. Each time a different user logs in, their username is updated in the "user_logged_in" column. This method replicates the functionality of Flask sessions by storing the username for later use in other functions and HTML files.
+
+Now, I can easily refer to the username within the "current_user" table to determine which reports should be displayed based on the logged-in user. This solution addresses potential issues I might have encountered in my application, such as users accessing other users' reports without using their own accounts.
 
 - To address the issue of buttons overlapping tables, headings, and paragraphs, I have included page breaks between the buttons and the tables, headings, or paragraphs. This ensures that the content is properly separated and displayed without overlapping.
+
+- During the initial development of the project, my intention was to allow high school users to convert their APS scores to a GPA 4.0 scale and vice versa. However, I encountered an issue with this approach. APS calculations are constrained to a maximum of 7 subjects, while GPA calculations can involve more than 7 subjects. This meant that users who had studied more than 7 subjects in their report would need to select only 7 subjects for APS calculation.
+
+Consequently, on the web page's APS AVERAGE section, I incorporated a provision for up to 14 inputs from the user, including both subjects and corresponding grades. This flexibility was introduced to accommodate situations where users might have more than 7 subjects to consider for GPA conversion, thus providing a more accurate representation of their academic performance.
 
 ## Installation
 1. Requirements on how to install this application locally packages:
@@ -90,11 +96,11 @@ This HTML file offers a user-friendly interface for computing the APS score usin
      - Python
      - SQLIte
      - JavaScript
-2. Clone the repository: `git clone https://github.com/Justonator16/APSToGPA-Project.git`
-3. Navigate to the project folder: `cd apstogpa`
+2. Clone the repository: `git clone https://github.com/Justonator16/APSToGPA.git`
+
 
 ## Usage
-1. Run the web application: `python app.py`
+1. Run the web application: `flask run`
 2. Open a web browser and go to `http://localhost:5000`
 3. Sign up or log in to your account.
 4. Use the various features to calculate APS levels, view reports, and more.
